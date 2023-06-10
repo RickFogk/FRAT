@@ -15,43 +15,10 @@
         }
     </style>
 
-    <script>
-        function calculateScore() {
-            var totalScore = 0;
-            var inputElems = document.getElementsByTagName('input');
-            for (var i=0; i<inputElems.length; i++) {       
-                if (inputElems[i].type === "checkbox" && inputElems[i].checked === true) {
-                    totalScore += parseInt(inputElems[i].value);
-                }
-            }
-            document.getElementById("totalScore").innerHTML = "Total Score: " + totalScore;
-
-            var classification = "";
-            if(totalScore > 35) {
-                classification = "Requires VP Approval";
-            } else if(totalScore > 21) {
-                classification = "Requires Flight OPS MGR Approval";
-            } else {
-                classification = "No special approval required";
-            }
-            document.getElementById("classification").innerHTML = "Classification: " + classification;
-        }
-
-        function handleMitigation(textFieldId, isYesSelected) {
-            var textInput = document.getElementById(textFieldId);
-            if (isYesSelected) {
-                textInput.style.display = 'block';
-            } else {
-                textInput.style.display = 'none';
-                textInput.value = '';  // clear the input
-            }
-        }
-    
 
 
 
 
-    </script>
 </head>
 <body>
     <h1>Flight Risk Assessment</h1>
@@ -70,367 +37,485 @@
         </div>
 
         <!-- Part II: Operation/Equipment factor -->
-        <h2>Part II: Operation/Equipment factor</h2>
-        <div class="row">
-            <div class="cell"><label><input type="checkbox" value="5" onclick="calculateScore()"> Degraded navigation capability</label></div>
-            <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation1" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction1', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation1" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction1', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
-        <div class="row">
-            <div class="cell"><label><input type="checkbox" value="8" onclick="calculateScore()"> Short Notice/Change</label></div>
-            <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation2" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction2', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation2" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction2', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction2" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
-        <div class="row">
-            <div class="cell"><label><input type="checkbox" value="2" onclick="calculateScore()"> Twilight Takeoff or landing (30min. within sunrise/sunset)</label></div>
-            <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation3" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction3', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation3" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction3', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction3" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
-        <div class="row">
-            <div class="cell"><label><input type="checkbox" value="2" onclick="calculateScore()"> Night Ops</label></div>
-            <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation4" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction4', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation4" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction4', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction4" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
-        <div class="row">
-            <div class="cell"><label><input type="checkbox" value="2" onclick="calculateScore()"> Maintenance issue (MEL)</label></div>
-            <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation5" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction5', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation5" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction5', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction5" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
-        <div class="row">
-            <div class="cell"><label><input type="checkbox" value="2" onclick="calculateScore()"> Passengers aboard without a Flight Attendant</label></div>
-            <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation6" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction6', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation6" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction6', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction6" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+<h2>Part II: Operation/Equipment factor</h2>
+<div class="row">
+    <div class="cell">
+      <label><input id="checkbox1" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Degraded navigation capability</label>
+    </div>
+    <!-- Example for checkbox1 -->
+    <div id="mitigation1" class="mitigation" style="display: none;">
 
-        <!-- Part III: Operation/Equipment factor -->
-        <h2>Part III: Human Factor</h2>
+      Mitigation applied?
+      <!--<label><input type="radio" name="degradedNavigationMitigation1" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction1', true)" disabled> Yes</label>-->
+      <!--<label><input type="radio" name="degradedNavigationMitigation1" value="No" onclick="handleMitigation('degradedNavigationMitigationAction1', false)" disabled> No</label>-->
+      <!--<input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <!--<button id="applyButton1" class="apply-button" data-checkbox-id="1" onclick="applyMitigation(this)" disabled>Apply</button>-->
+      <label><input type="radio" name="degradedNavigationMitigation1" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation1" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton1" class="apply-button" data-checkbox-id="checkbox1" disabled>Apply</button>
+    </div>
+  </div>
+  
+
+<div class="row">
+  <div class="cell">
+    <label><input id="checkbox2" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> Short Notice/Change</label>
+  </div>
+  <div id="mitigation2" class="mitigation" style="display: none;">
+    Mitigation applied?
+    <label><input type="radio" name="degradedNavigationMitigation2" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation2" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction2" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton2" class="apply-button" data-checkbox-id="checkbox2" disabled>Apply</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="cell">
+    <label><input id="checkbox3" type="checkbox" value="2" onclick="calculateScore(parseInt(this.value), this)"> Twilight Takeoff or landing (30min. within sunrise/sunset)</label>
+  </div>
+  <div id="mitigation3" class="mitigation" style="display: none;">
+    Mitigation applied?
+    <label><input type="radio" name="degradedNavigationMitigation3" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation3" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction3" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton3" class="apply-button" data-checkbox-id="checkbox3" disabled>Apply</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="cell">
+    <label><input id="checkbox4" type="checkbox" value="2" onclick="calculateScore(parseInt(this.value), this)"> Night Ops</label>
+</div>
+<div id="mitigation4" class="mitigation" style="display: none;">
+  Mitigation applied?
+  <label><input type="radio" name="degradedNavigationMitigation4" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation4" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction4" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton4" class="apply-button" data-checkbox-id="checkbox4" disabled>Apply</button>
+</div>
+</div>
+
+<div class="row">
+<div class="cell">
+  <label><input id="checkbox5" type="checkbox" value="2" onclick="calculateScore(parseInt(this.value), this)"> Maintenance issue (MEL)</label>
+</div>
+<div id="mitigation5" class="mitigation" style="display: none;">
+  Mitigation applied?
+  <label><input type="radio" name="degradedNavigationMitigation5" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation5" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction5" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton5" class="apply-button" data-checkbox-id="checkbox5" disabled>Apply</button>
+</div>
+</div>
+
+<div class="row">
+<div class="cell">
+  <label><input id="checkbox6" type="checkbox" value="2" onclick="calculateScore(parseInt(this.value), this)"> Passengers aboard without a Flight Attendant</label>
+</div>
+<div id="mitigation6" class="mitigation" style="display: none;">
+  Mitigation applied?
+  <label><input type="radio" name="degradedNavigationMitigation6" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation6" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction6" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton6" class="apply-button" data-checkbox-id="checkbox6" disabled>Apply</button>
+</div>
+</div>
+
+<!-- Part III: Operation/Equipment factor -->
+<h2>Part III: Human Factor</h2>
+<div class="row">
+    <div class="cell">
+    <label><input id="checkbox7" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> IMSAFE crew score (Range 2-5)</label>
+    </div>
+    <div id="mitigation7" class="mitigation" style="display: none;">
+        Mitigation applied?
+        <label><input type="radio" name="degradedNavigationMitigation7" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation7" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction7" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButto71" class="apply-button" data-checkbox-id="checkbox7" disabled>Apply</button>
+      </div>
+      </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="5" onclick="calculateScore()"> IMSAFE crew score (Range 2-5)</label></div>
-            <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation7" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction7', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation7" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction7', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction7" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
+        <div class="cell">
+        <label><input id="checkbox8" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)"> IMSAFE crew score(Range 6-10)</label>
         </div>
+        <div id="mitigation8" class="mitigation" style="display: none;">
+            Mitigation applied?
+            <label><input type="radio" name="degradedNavigationMitigation8" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation8" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction8" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton8" class="apply-button" data-checkbox-id="checkbox8" disabled>Apply</button>
+          </div>
+          </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="10" onclick="calculateScore()"> IMSAFE crew score(Range 6-10)</label></div>
             <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation8" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction8', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation8" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction8', false)"> No</label>
+            <label><input id="checkbox9" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)"> IMSAFE crew score(Range > 10)</label>
             </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction8" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+            <div id="mitigation9" class="mitigation" style="display: none;">
+                Mitigation applied?
+                <label><input type="radio" name="degradedNavigationMitigation9" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation9" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction9" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton9" class="apply-button" data-checkbox-id="checkbox9" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="10" onclick="calculateScore()"> IMSAFE crew score(Range > 10)</label></div>
             <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation9" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction9', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation9" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction9', false)"> No</label>
+            <label><input id="checkbox10" type="checkbox" value="15" onclick="calculateScore(parseInt(this.value), this)"> Less than 100 hours international experience</label>
             </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction9" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+            <div id="mitigation10" class="mitigation" style="display: none;">
+                Mitigation applied?
+                <label><input type="radio" name="degradedNavigationMitigation10" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation10" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction10" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton10" class="apply-button" data-checkbox-id="checkbox10" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="15" onclick="calculateScore()"> Less than 100 hours international experience</label></div>
             <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation10" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction10', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation10" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction10', false)"> No</label>
+            <label><input id="checkbox11" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Unfamiliar with Brazil airport destination (First Time)</label>
             </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction10" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+            <div id="mitigation11" class="mitigation" style="display: none;">
+                Mitigation applied?
+                <label><input type="radio" name="degradedNavigationMitigation11" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation11" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction11" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton11" class="apply-button" data-checkbox-id="checkbox11" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="5" onclick="calculateScore()"> Unfamiliar with Brazil airport destination (First Time)</label></div>
             <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation11" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction11', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation11" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction11', false)"> No</label>
+            <label><input id="checkbox12" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)"> Unfamiliar with Foreign airport destination (First Time)</label>
             </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction11" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+            <div id="mitigation12" class="mitigation" style="display: none;">
+                Mitigation applied?
+                <label><input type="radio" name="degradedNavigationMitigation12" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation12" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction12" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton12" class="apply-button" data-checkbox-id="checkbox12" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="10" onclick="calculateScore()"> Unfamiliar with Foreign airport destination (First Time)</label></div>
             <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation12" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction12', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation12" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction12', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction12" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
+            <label><input id="checkbox13" type="checkbox" value="15" onclick="calculateScore(parseInt(this.value), this)"> Pilot and ATCO do not speak the same language</label>
         </div>
+        <div id="mitigation13" class="mitigation" style="display: none;">
+            Mitigation applied?
+            <label><input type="radio" name="degradedNavigationMitigation13" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation13" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction13" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton13" class="apply-button" data-checkbox-id="checkbox13" disabled>Apply</button>
+          </div>
+          </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="15" onclick="calculateScore()"> Pilot and ATCO do not speak the same language</label></div>
             <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation13" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction13', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation13" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction13', false)"> No</label>
+            <label><input id="checkbox14" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)">Training Flight </label>
             </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction13" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+            <div id="mitigation14" class="mitigation" style="display: none;">
+                Mitigation applied?
+                <label><input type="radio" name="degradedNavigationMitigation14" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation14" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction14" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton14" class="apply-button" data-checkbox-id="checkbox14" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="10" onclick="calculateScore()">Training Flight </label></div>
             <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation14" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction14', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation14" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction14', false)"> No</label>
+            <label><input id="checkbox15" type="checkbox" value="15" onclick="calculateScore(parseInt(this.value), this)"> Flying with freelance pilot</label>
             </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction14" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+            <div id="mitigation15" class="mitigation" style="display: none;">
+                Mitigation applied?
+                <label><input type="radio" name="degradedNavigationMitigation15" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation15" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction15" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton15" class="apply-button" data-checkbox-id="checkbox15" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="15" onclick="calculateScore()"> Flying with freelance pilot</label></div>
             <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation15" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction15', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation15" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction15', false)"> No</label>
+            <label><input id="checkbox16" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)"> Either pilot has not flown aircraft type in the past 30 days</label>
             </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction15" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
-        <div class="row">
-            <div class="cell"><label><input type="checkbox" value="10" onclick="calculateScore()"> Either pilot has not flown aircraft type in the past 30 days</label></div>
-            <div class="cell">
+            <div id="mitigation16" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation16" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction16', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation16" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction16', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction16" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation16" value="Yes"> Yes</label>
+                <label><input type="radio" name="degradedNavigationMitigation16" value="No"> No</label>
+                <input type="text" id="degradedNavigationMitigationAction16" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+                <button id="applyButton16 class="apply-button" data-checkbox-id="checkbox16" disabled>Apply</button>
+              </div>
+              </div>
 
         <!-- Part IV: Weather -->
         <h2>Part IV: Weather</h2>
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="5" onclick="calculateScore()"> Must apply temperature compensation at departure</label></div>
+            <div class="cell">
+            <label><input id="checkbox17" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this))"> Must apply temperature compensation at departure</label>
+            </div>
+            <div id="mitigation17" class="mitigation" style="display: none;">
+                Mitigation applied?
+                <label><input type="radio" name="degradedNavigationMitigation17" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation17" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction17" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton17" class="apply-button" data-checkbox-id="checkbox17" disabled>Apply</button>
+              </div>
+              </div>
+
+        <div class="row">
+            <div class="cell">
+            <label><input id="checkbox18" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Precipitation at Departure or Destination airport</label>
+            </div>
+            <div id="mitigation18" class="mitigation" style="display: none;">
+                Mitigation applied?
+                <label><input type="radio" name="degradedNavigationMitigation18" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation18" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction18" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton18" class="apply-button" data-checkbox-id="checkbox18" disabled>Apply</button>
+              </div>
+              </div>
+
+        <div class="row">
+            <div class="cell">
+            <label><input id="checkbox19" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> Contaminated runway</label>
+            </div>
+            <<div id="mitigation19" class="mitigation" style="display: none;">
+                Mitigation applied?
+                <label><input type="radio" name="degradedNavigationMitigation19" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation19" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction19" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton19" class="apply-button" data-checkbox-id="checkbox19" disabled>Apply</button>
+              </div>
+              </div>
+
+        <div class="row">
+            <div class="cell"><label><input id="checkbox20" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> TO visibility < 1500</label></div>
+            <div id="mitigation20" class="mitigation" style="display: none;">
+                Mitigation applied?
+                <label><input type="radio" name="degradedNavigationMitigation20" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation20" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction20" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton20" class="apply-button" data-checkbox-id="checkbox20" disabled>Apply</button>
+              </div>
+              </div>
+
+        <div class="row">
+            <div class="cell"><label><input id="checkbox21" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Departure Alternate procedure require for TO</label></div>
             <div class="cell">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation17" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction17', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation17" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction17', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction17" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
+                <label><input type="radio" name="degradedNavigationMitigation21" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation21" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction21" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton21" class="apply-button" data-checkbox-id="checkbox21" disabled>Apply</button>
+        </div>
         </div>
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="5" onclick="calculateScore()"> Precipitation at Departure or Destination airport</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox22" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> Moderate icing forecast en route)</label></div>
+            <div id="mitigation22" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation18" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction18', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation18" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction18', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction18" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation22" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation22" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton22" class="apply-button" data-checkbox-id="checkbox22" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="8" onclick="calculateScore()"> Contaminated runway</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox23" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> Turbulence forecast moderate or greater</label></div>
+            <div id="mitigation23" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <<label><input type="radio" name="degradedNavigationMitigation19" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction19', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation19" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction19', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction19" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation23" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation23" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton23" class="apply-button" data-checkbox-id="checkbox23" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="8" onclick="calculateScore()"> TO visibility < 1500</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox24" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)">IFR approach required (due to IMC) </label></div>
+            <div id="mitigation24" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation20" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction20', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation20" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction20', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction20" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation24" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation1" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction24" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton24" class="apply-button" data-checkbox-id="checkbox24" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="5" onclick="calculateScore()"> Departure Alternate procedure require for TO</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox25" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> IFR ceiling 200 ft above the IFR minimuns</label></div>
+            <div id="mitigation25" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation21" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction21', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation21" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction21', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction21" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation25" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation25" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton25" class="apply-button" data-checkbox-id="checkbox25" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="8" onclick="calculateScore()"> Moderate icing forecast en route)</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox26" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> IFR landing visibility < 5000 m</label></div>
+            <div id="mitigation26" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation22" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction22', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation22" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction22', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction22" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation26" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation26" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction26" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton26" class="apply-button" data-checkbox-id="checkbox26" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="8" onclick="calculateScore()"> Turbulence forecast moderate or greater</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox27" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> IFR landing visibility < 1000 (EFVS)</label></div>
+            <div id="mitigation27" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation23" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction23', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation23" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction23', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction23" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation27" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation27" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction27" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton27" class="apply-button" data-checkbox-id="checkbox27" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="8" onclick="calculateScore()">IFR approach required (due to IMC) </label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox28" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> Crosswind component >= 25 kt points</label></div>
+            <div id="mitigation28" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation24" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction24', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation24" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction24', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction24" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation28" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation28" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction28" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton28" class="apply-button" data-checkbox-id="checkbox28" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="8" onclick="calculateScore()"> IFR ceiling 200 ft above the IFR minimuns</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox29" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)">Landing tail wind</label></div>
+            <div id="mitigation29" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation25" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction25', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation25" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction25', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction25" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation29" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation29" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction29" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton29" class="apply-button" data-checkbox-id="checkbox29" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="8" onclick="calculateScore()"> IFR landing visibility < 5000 m</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox30" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)">Gust Landing > 25 kt points</label></div>
+            <div id="mitigation30" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation26" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction26', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation26" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction26', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction26" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
-        <div class="row">
-            <div class="cell"><label><input type="checkbox" value="8" onclick="calculateScore()"> IFR landing visibility < 1000 (EFVS)</label></div>
-            <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation27" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction27', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation27" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction27', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction27" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
-        <div class="row">
-            <div class="cell"><label><input type="checkbox" value="8" onclick="calculateScore()"> Crosswind component >= 25 kt points</label></div>
-            <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation28" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction28', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation28" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction28', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction28" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
-        <div class="row">
-            <div class="cell"><label><input type="checkbox" value="8" onclick="calculateScore()">Landing tail wind</label></div>
-            <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation29" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction29', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation29" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction29', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction29" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
-        <div class="row">
-            <div class="cell"><label><input type="checkbox" value="8" onclick="calculateScore()">Gust Landing > 25 kt points</label></div>
-            <div class="cell">
-                Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation30" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction30', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation30" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction30', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction30" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation30" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation30" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction30" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton30" class="apply-button" data-checkbox-id="checkbox30" disabled>Apply</button>
+              </div>
+              </div>
 
         <!-- Part V: Airport Factors -->
         <h2>Part V: Airport Factors</h2>
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="15" onclick="calculateScore()"> TO distance available is less than 115% of calculated TO distance</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox31" type="checkbox" value="15" onclick="calculateScore(parseInt(this.value), this)"> TO distance available is less than 115% of calculated TO distance</label></div>
+            <div id="mitigation31" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation31" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction31', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation31" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction31', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction31" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation31" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation31" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction31" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton31" class="apply-button" data-checkbox-id="checkbox31" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="15" onclick="calculateScore()"> Landing distance available is less than 115% of calculated landing distance</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox32" type="checkbox" value="15" onclick="calculateScore(parseInt(this.value), this)"> Landing distance available is less than 115% of calculated landing distance</label></div>
+            <div id="mitigation32" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation32" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction32', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation32" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction32', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction32" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation1" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation32" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction32" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton32" class="apply-button" data-checkbox-id="checkbox32" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="15" onclick="calculateScore()"> Runway width less than 23m if 180 deg turn around required</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox33" type="checkbox" value="15" onclick="calculateScore(parseInt(this.value), this)"> Runway width less than 23m if 180 deg turn around required</label></div>
+            <div id="mitigation33" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation33" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction33', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation33" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction33', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction33" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation33" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation33" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction33" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton33" class="apply-button" data-checkbox-id="checkbox33" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="10" onclick="calculateScore()"> Mountainous Terrain-increase of 3000ft radius of 10nm</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox34" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)"> Mountainous Terrain-increase of 3000ft radius of 10nm</label></div>
+            <div id="mitigation34" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation34" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction34', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation34" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction34', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction34" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation34" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation34" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction34" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton34" class="apply-button" data-checkbox-id="checkbox34" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="5" onclick="calculateScore()"> High altitude operation (airport above 5000 msl)</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox35" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> High altitude operation (airport above 5000 msl)</label></div>
+            <div id="mitigation35" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation35" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction35', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation35" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction35', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction35" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation35" value="Yes"> Yes</label>
+                <label><input type="radio" name="degradedNavigationMitigation35" value="No"> No</label>
+                <input type="text" id="degradedNavigationMitigationAction35" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+                <button id="applyButton35" class="apply-button" data-checkbox-id="checkbox35" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="5" onclick="calculateScore()">Non-towered airport</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox36" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)">Non-towered airport</label></div>
+            <div id="mitigatio36" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation36" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction36', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation36" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction36', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction36" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation1" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation36" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction36" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton36" class="apply-button" data-checkbox-id="checkbox36" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="5" onclick="calculateScore()"> Runway site under construction</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox37" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Runway site under construction</label></div>
+            <div id="mitigation37" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation37" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction37', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation37" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction37', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction37" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation37" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation37" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction37" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton37" class="apply-button" data-checkbox-id="checkbox37" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="2" onclick="calculateScore()">Lack of PAPI/VASI </label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox38" type="checkbox" value="2" onclick="calculateScore(parseInt(this.value), this)">Lack of PAPI/VASI </label></div>
+            <div id="mitigation38" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation38" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction38', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation38" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction38', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction38" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation38" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation1" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction38" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton38" class="apply-button" data-checkbox-id="checkbox38" disabled>Apply</button>
+              </div>
+              </div>
+
         <div class="row">
-            <div class="cell"><label><input type="checkbox" value="3" onclick="calculateScore()"> No published IAP</label></div>
-            <div class="cell">
+            <div class="cell"><label><input id="checkbox39" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)"> No published IAP</label></div>
+            <div id="mitigation39" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation39" value="Yes" onclick="handleMitigation('degradedNavigationMitigationAction39', true)"> Yes</label>
-                <label><input type="radio" name="degradedNavigationMitigation39" value="No"  onclick="handleMitigation('degradedNavigationMitigationAction39', false)"> No</label>
-            </div>
-            <div class="cell"><input type="text" id="degradedNavigationMitigationAction39" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action"></div>
-        </div>
+                <label><input type="radio" name="degradedNavigationMitigation39" value="Yes"> Yes</label>
+      <label><input type="radio" name="degradedNavigationMitigation1" value="No"> No</label>
+      <input type="text" id="degradedNavigationMitigationAction39" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <button id="applyButton39" class="apply-button" data-checkbox-id="checkbox39" disabled>Apply</button>
+              </div>
+              </div>
         
         
         <!-- Add similar rows for other items... -->
@@ -438,8 +523,9 @@
         <!-- Display Total Score -->
         <p id="totalScore">Total Score: 0</p>
         <p id="classification">Classification: No special approval required</p>
-
+        <button onclick="showMitigation()">Mitigate</button>
         <input type="submit" value="Submit">
     </form>
+    <script src="js/js.js"></script>
 </body>
 </html>
