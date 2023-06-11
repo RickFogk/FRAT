@@ -1,0 +1,178 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+  
+  h1, h2 {
+    color: #333;
+  }
+
+  h2 {
+    color: #4a4a4a; 
+    font-size: 24px; 
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border-top: 2px solid #ccc;
+    padding-top: 15px;
+  }
+  
+  form {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  
+  .cell {
+    flex: 1;
+    padding: 5px;
+  }
+  
+  label {
+    display: block;
+  }
+  
+  input[type="text"], input[type="date"] {
+    width: 100%;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+  }
+  
+  input[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .mitigation {
+    background-color: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  .apply-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+  
+  .apply-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+
+
+  
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .parent-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: start;
+    margin-top: 20px;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  }
+  
+  .header, .severity-header, .likelihood-header {
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    background-color: #ddd;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .severity-header, .likelihood-header {
+    grid-column: span 5;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .rating {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .green {
+    background-color: #b9f6ca;
+    text-align: center;
+  }
+  
+  .yellow {
+    background-color: #ffee58;
+    text-align: center;
+  }
+  
+  .red {
+    background-color: #ff8a80;
+    text-align: center;
+  }
+  
+  .parent-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    align-items: stretch;
+  }
+  
+  .example {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  }
+  
+  .example h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .example h4 {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .example ul {
+    margin-bottom: 10px;
+  }
+  
+  .example li {
+    margin-bottom: 5px;
+  }
+  

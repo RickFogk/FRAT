@@ -14,7 +14,7 @@
             flex: 1;
         }
     </style>
-
+<link rel="stylesheet" href="css/styles.css">
 
 
 
@@ -52,7 +52,12 @@
       <!--<button id="applyButton1" class="apply-button" data-checkbox-id="1" onclick="applyMitigation(this)" disabled>Apply</button>-->
       <label><input type="radio" name="degradedNavigationMitigation1" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation1" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="MEL Applied - Alternate NAV source">MEL Applied - Alternate NAV source</option>
+        
+      </select>
       <button id="applyButton1" class="apply-button" data-checkbox-id="checkbox1" disabled>Apply</button>
     </div>
   </div>
@@ -60,132 +65,246 @@
 
 <div class="row">
   <div class="cell">
-    <label><input id="checkbox2" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> Short Notice/Change</label>
+    <label><input id="checkbox2" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)"> Short Notice/Change</label>
   </div>
   <div id="mitigation2" class="mitigation" style="display: none;">
     Mitigation applied?
     <label><input type="radio" name="degradedNavigationMitigation2" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation2" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction2" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction2" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction2" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton2" class="apply-button" data-checkbox-id="checkbox2" disabled>Apply</button>
   </div>
 </div>
 
 <div class="row">
   <div class="cell">
-    <label><input id="checkbox3" type="checkbox" value="2" onclick="calculateScore(parseInt(this.value), this)"> Twilight Takeoff or landing (30min. within sunrise/sunset)</label>
+    <label><input id="checkbox3" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)"> Twilight Takeoff or landing (30min. within sunrise/sunset)</label>
   </div>
   <div id="mitigation3" class="mitigation" style="display: none;">
     Mitigation applied?
     <label><input type="radio" name="degradedNavigationMitigation3" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation3" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction3" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction3" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction3" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton3" class="apply-button" data-checkbox-id="checkbox3" disabled>Apply</button>
   </div>
 </div>
 
 <div class="row">
   <div class="cell">
-    <label><input id="checkbox4" type="checkbox" value="2" onclick="calculateScore(parseInt(this.value), this)"> Night Ops</label>
+    <label><input id="checkbox4" type="checkbox" value="4" onclick="calculateScore(parseInt(this.value), this)"> Night Ops</label>
 </div>
 <div id="mitigation4" class="mitigation" style="display: none;">
   Mitigation applied?
   <label><input type="radio" name="degradedNavigationMitigation4" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation4" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction4" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction4" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <!-- Replace the input text field with a select (dropdown menu) -->
+  <select id="degradedNavigationMitigationAction4" name="degradedNavigationMitigationAction" disabled>
+    <option value="">Select mitigation action</option>
+    <option value="IFR procedure applied">IFR procedure applied</option>
+    <option value="Visual with PAPI">Visual with PAPI</option>
+  </select>
       <button id="applyButton4" class="apply-button" data-checkbox-id="checkbox4" disabled>Apply</button>
 </div>
 </div>
 
 <div class="row">
 <div class="cell">
-  <label><input id="checkbox5" type="checkbox" value="2" onclick="calculateScore(parseInt(this.value), this)"> Maintenance issue (MEL)</label>
+  <label><input id="checkbox5" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Maintenance issue (MEL)</label>
 </div>
 <div id="mitigation5" class="mitigation" style="display: none;">
   Mitigation applied?
   <label><input type="radio" name="degradedNavigationMitigation5" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation5" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction5" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction5" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction5" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton5" class="apply-button" data-checkbox-id="checkbox5" disabled>Apply</button>
 </div>
 </div>
 
 <div class="row">
 <div class="cell">
-  <label><input id="checkbox6" type="checkbox" value="2" onclick="calculateScore(parseInt(this.value), this)"> Passengers aboard without a Flight Attendant</label>
+  <label><input id="checkbox6" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)"> Passengers aboard without a Flight Attendant</label>
 </div>
 <div id="mitigation6" class="mitigation" style="display: none;">
   Mitigation applied?
   <label><input type="radio" name="degradedNavigationMitigation6" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation6" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction6" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction6" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction6" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="No onboard meal">No onboard mea</option>
+        <option value="Hire a Cabin Attendant">Visual with PAPI</option>
+      </select>
       <button id="applyButton6" class="apply-button" data-checkbox-id="checkbox6" disabled>Apply</button>
 </div>
 </div>
 
 <!-- Part III: Operation/Equipment factor -->
 <h2>Part III: Human Factor</h2>
+<button id="imsafeButton">IMSAFE Checklist</button>
+
+<div id="imsafeSection" style="display: none;">
+  <h3>IMSAFE Checklist</h3>
+  <fo id="imsafeForm">
+    <label for="illness">Illness:
+      <select id="illness">
+        <option value="0">No illness</option>
+        <option value="5">Minor illness</option>
+        <option value="10">Serious illness</option>
+      </select>
+    </label><br>
+
+    <label for="medication">Medication:
+      <select id="medication">
+        <option value="0">No medication</option>
+        <option value="5">Over-the-counter medication</option>
+        <option value="10">Prescription medication</option>
+      </select>
+    </label><br>
+
+    <label for="stress">Stress:
+      <select id="stress">
+        <option value="0">No stress</option>
+        <option value="5">Moderate stress</option>
+        <option value="10">High stress</option>
+      </select>
+    </label><br>
+
+    <label for="alcohol">Alcohol:
+      <select id="alcohol">
+        <option value="0">No alcohol</option>
+        <option value="15">Alcohol within the last 8 hours</option>
+      </select>
+    </label><br>
+
+    <label for="fatigue">Fatigue:
+      <select id="fatigue">
+        <option value="0">Well-rested</option>
+        <option value="5">Slightly fatigued</option>
+        <option value="10">Severely fatigued</option>
+      </select>
+    </label><br>
+
+    <label for="emotion">Emotion:
+      <select id="emotion">
+        <option value="0">Emotionally stable</option>
+        <option value="5">Slightly emotional</option>
+        <option value="10">Highly emotional</option>
+      </select>
+    </label><br>
+
+    <button type="button" id="calculateImsafe">Calculate IMSAFE Score</button>
+    <div id="imsafeScoreDisplay"></div> <!-- This will display the score -->
+  
+</div>
+
+<!-- Rest of your existing HTML code... -->
+
+
+
 <div class="row">
+
     <div class="cell">
-    <label><input id="checkbox7" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> IMSAFE crew score (Range 2-5)</label>
+    <label><input id="checkbox7" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)">Pilot 1 - IMSAFE crew score (Range 0-25)</label>
     </div>
     <div id="mitigation7" class="mitigation" style="display: none;">
         Mitigation applied?
         <label><input type="radio" name="degradedNavigationMitigation7" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation7" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction7" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
-      <button id="applyButto71" class="apply-button" data-checkbox-id="checkbox7" disabled>Apply</button>
+      <!--<input type="text" id="degradedNavigationMitigationAction7" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction7" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
+      <button id="applyButton7" class="apply-button" data-checkbox-id="checkbox7" disabled>Apply</button>
       </div>
       </div>
 
+
         <div class="row">
         <div class="cell">
-        <label><input id="checkbox8" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)"> IMSAFE crew score(Range 6-10)</label>
+        <label><input id="checkbox8" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)">Pilot 1 - IMSAFE crew score(Range 26-29)</label>
         </div>
         <div id="mitigation8" class="mitigation" style="display: none;">
             Mitigation applied?
             <label><input type="radio" name="degradedNavigationMitigation8" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation8" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction8" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction8" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction8" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton8" class="apply-button" data-checkbox-id="checkbox8" disabled>Apply</button>
           </div>
           </div>
 
         <div class="row">
             <div class="cell">
-            <label><input id="checkbox9" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)"> IMSAFE crew score(Range > 10)</label>
+            <label><input id="checkbox9" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)">Pilot 1 - IMSAFE crew score(Range > 30)</label>
             </div>
             <div id="mitigation9" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation9" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation9" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction9" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction9" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction9" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton9" class="apply-button" data-checkbox-id="checkbox9" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
             <div class="cell">
-            <label><input id="checkbox10" type="checkbox" value="15" onclick="calculateScore(parseInt(this.value), this)"> Less than 100 hours international experience</label>
+            <label><input id="checkbox10" type="checkbox" value="15" onclick="calculateScore(parseInt(this.value), this)"> Less than 100 hours international experience and is International Flight</label>
             </div>
             <div id="mitigation10" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation10" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation10" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction10" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction10" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction10" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton10" class="apply-button" data-checkbox-id="checkbox10" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
             <div class="cell">
-            <label><input id="checkbox11" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Unfamiliar with Brazil airport destination (First Time)</label>
+            <label><input id="checkbox11" type="checkbox" value="4" onclick="calculateScore(parseInt(this.value), this)"> Unfamiliar with Brazil airport destination (First Time)</label>
             </div>
             <div id="mitigation11" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation11" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation11" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction11" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction11" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction11" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton11" class="apply-button" data-checkbox-id="checkbox11" disabled>Apply</button>
               </div>
               </div>
@@ -198,36 +317,69 @@
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation12" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation12" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction12" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction12" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction12" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton12" class="apply-button" data-checkbox-id="checkbox12" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
             <div class="cell">
-            <label><input id="checkbox13" type="checkbox" value="15" onclick="calculateScore(parseInt(this.value), this)"> Pilot and ATCO do not speak the same language</label>
+            <label><input id="checkbox13" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Pilot and ATCO do not speak the same language</label>
         </div>
         <div id="mitigation13" class="mitigation" style="display: none;">
             Mitigation applied?
             <label><input type="radio" name="degradedNavigationMitigation13" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation13" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction13" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction13" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction13" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton13" class="apply-button" data-checkbox-id="checkbox13" disabled>Apply</button>
           </div>
           </div>
 
         <div class="row">
             <div class="cell">
-            <label><input id="checkbox14" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)">Training Flight </label>
+            <label><input id="checkbox14" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)">Training Flight </label>
             </div>
             <div id="mitigation14" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation14" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation14" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction14" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction14" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction14" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton14" class="apply-button" data-checkbox-id="checkbox14" disabled>Apply</button>
               </div>
               </div>
+
+              <div class="row">
+                <div class="cell">
+                <label><input id="checkbox40" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)">Maintenence Flight </label>
+                </div>
+                <div id="mitigation40" class="mitigation" style="display: none;">
+                    Mitigation applied?
+                    <label><input type="radio" name="degradedNavigationMitigation40" value="Yes"> Yes</label>
+          <label><input type="radio" name="degradedNavigationMitigation40" value="No"> No</label>
+          <!--<input type="text" id="degradedNavigationMitigationAction40" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+          <select id="degradedNavigationMitigationAction40" name="degradedNavigationMitigationAction" disabled>
+            <option value="">Select mitigation action</option>
+            <option value="IFR procedure applied">IFR procedure applied</option>
+            <option value="Visual with PAPI">Visual with PAPI</option>
+          </select>
+          <button id="applyButton40" class="apply-button" data-checkbox-id="checkbox40" disabled>Apply</button>
+                  </div>
+                  </div>
 
         <div class="row">
             <div class="cell">
@@ -237,7 +389,12 @@
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation15" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation15" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction15" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction15" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction15" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton15" class="apply-button" data-checkbox-id="checkbox15" disabled>Apply</button>
               </div>
               </div>
@@ -250,7 +407,12 @@
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation16" value="Yes"> Yes</label>
                 <label><input type="radio" name="degradedNavigationMitigation16" value="No"> No</label>
-                <input type="text" id="degradedNavigationMitigationAction16" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+                <!--<input type="text" id="degradedNavigationMitigationAction16" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+                <select id="degradedNavigationMitigationAction16" name="degradedNavigationMitigationAction" disabled>
+                    <option value="">Select mitigation action</option>
+                    <option value="IFR procedure applied">IFR procedure applied</option>
+                    <option value="Visual with PAPI">Visual with PAPI</option>
+                  </select>
                 <button id="applyButton16 class="apply-button" data-checkbox-id="checkbox16" disabled>Apply</button>
               </div>
               </div>
@@ -259,13 +421,18 @@
         <h2>Part IV: Weather</h2>
         <div class="row">
             <div class="cell">
-            <label><input id="checkbox17" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this))"> Must apply temperature compensation at departure</label>
+            <label><input id="checkbox17" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Must apply temperature compensation at departure</label>
             </div>
             <div id="mitigation17" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation17" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation17" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction17" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction17" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction17" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton17" class="apply-button" data-checkbox-id="checkbox17" disabled>Apply</button>
               </div>
               </div>
@@ -278,7 +445,12 @@
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation18" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation18" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction18" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction18" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction18" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton18" class="apply-button" data-checkbox-id="checkbox18" disabled>Apply</button>
               </div>
               </div>
@@ -287,33 +459,48 @@
             <div class="cell">
             <label><input id="checkbox19" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> Contaminated runway</label>
             </div>
-            <<div id="mitigation19" class="mitigation" style="display: none;">
+            <div id="mitigation19" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation19" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation19" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction19" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction19" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction19" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton19" class="apply-button" data-checkbox-id="checkbox19" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox20" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> TO visibility < 1500</label></div>
+            <div class="cell"><label><input id="checkbox20" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> TO visibility < 1500m</label></div>
             <div id="mitigation20" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation20" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation20" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction20" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction20" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction20" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton20" class="apply-button" data-checkbox-id="checkbox20" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
             <div class="cell"><label><input id="checkbox21" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Departure Alternate procedure require for TO</label></div>
-            <div class="cell">
+            <div class="mitigation21" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation21" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation21" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction21" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction21" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction21" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton21" class="apply-button" data-checkbox-id="checkbox21" disabled>Apply</button>
         </div>
         </div>
@@ -323,7 +510,12 @@
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation22" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation22" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction22" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton22" class="apply-button" data-checkbox-id="checkbox22" disabled>Apply</button>
               </div>
               </div>
@@ -334,84 +526,124 @@
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation23" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation23" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction23" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton23" class="apply-button" data-checkbox-id="checkbox23" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox24" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)">IFR approach required (due to IMC) </label></div>
+            <div class="cell"><label><input id="checkbox24" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)">IFR approach required (due to IMC) </label></div>
             <div id="mitigation24" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation24" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation1" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction24" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction24" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction24" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton24" class="apply-button" data-checkbox-id="checkbox24" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox25" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> IFR ceiling 200 ft above the IFR minimuns</label></div>
+            <div class="cell"><label><input id="checkbox25" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> IFR ceiling 200 ft above the IFR minimuns</label></div>
             <div id="mitigation25" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation25" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation25" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction1" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction25" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton25" class="apply-button" data-checkbox-id="checkbox25" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox26" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> IFR landing visibility < 5000 m</label></div>
+            <div class="cell"><label><input id="checkbox26" type="checkbox" value="4" onclick="calculateScore(parseInt(this.value), this)"> IFR landing visibility < 5000m</label></div>
             <div id="mitigation26" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation26" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation26" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction26" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction26" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction26" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton26" class="apply-button" data-checkbox-id="checkbox26" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox27" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> IFR landing visibility < 1000 (EFVS)</label></div>
+            <div class="cell"><label><input id="checkbox27" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> IFR landing visibility < 1000m (EFVS)</label></div>
             <div id="mitigation27" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation27" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation27" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction27" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction27" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction27" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton27" class="apply-button" data-checkbox-id="checkbox27" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox28" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)"> Crosswind component >= 25 kt points</label></div>
+            <div class="cell"><label><input id="checkbox28" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Crosswind component >= 25 kt</label></div>
             <div id="mitigation28" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation28" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation28" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction28" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction28" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction28" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton28" class="apply-button" data-checkbox-id="checkbox28" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox29" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)">Landing tail wind</label></div>
+            <div class="cell"><label><input id="checkbox29" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)">Landing tail wind (only Threshold direction Avail.)</label></div>
             <div id="mitigation29" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation29" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation29" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction29" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction29" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction29" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton29" class="apply-button" data-checkbox-id="checkbox29" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox30" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)">Gust Landing > 25 kt points</label></div>
+            <div class="cell"><label><input id="checkbox30" type="checkbox" value="8" onclick="calculateScore(parseInt(this.value), this)">Gust Landing > 30 kt points</label></div>
             <div id="mitigation30" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation30" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation30" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction30" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction30" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction30" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton30" class="apply-button" data-checkbox-id="checkbox30" disabled>Apply</button>
               </div>
               </div>
@@ -419,56 +651,81 @@
         <!-- Part V: Airport Factors -->
         <h2>Part V: Airport Factors</h2>
         <div class="row">
-            <div class="cell"><label><input id="checkbox31" type="checkbox" value="15" onclick="calculateScore(parseInt(this.value), this)"> TO distance available is less than 115% of calculated TO distance</label></div>
+            <div class="cell"><label><input id="checkbox31" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)"> TO distance available is less than 115% of calculated TO distance</label></div>
             <div id="mitigation31" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation31" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation31" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction31" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction31" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction31" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton31" class="apply-button" data-checkbox-id="checkbox31" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox32" type="checkbox" value="15" onclick="calculateScore(parseInt(this.value), this)"> Landing distance available is less than 115% of calculated landing distance</label></div>
+            <div class="cell"><label><input id="checkbox32" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)"> Landing distance available is less than 115% of calculated landing distance</label></div>
             <div id="mitigation32" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation1" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation32" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction32" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction32" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction32" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton32" class="apply-button" data-checkbox-id="checkbox32" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox33" type="checkbox" value="15" onclick="calculateScore(parseInt(this.value), this)"> Runway width less than 23m if 180 deg turn around required</label></div>
+            <div class="cell"><label><input id="checkbox33" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)"> Runway width less than 23m if 180 deg turn around required</label></div>
             <div id="mitigation33" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation33" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation33" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction33" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction33" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction33" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton33" class="apply-button" data-checkbox-id="checkbox33" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox34" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)"> Mountainous Terrain-increase of 3000ft radius of 10nm</label></div>
+            <div class="cell"><label><input id="checkbox34" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Mountainous Terrain-increase of 3000ft radius of 10nm</label></div>
             <div id="mitigation34" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation34" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation34" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction34" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction34" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction34" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton34" class="apply-button" data-checkbox-id="checkbox34" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox35" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> High altitude operation (airport above 5000 msl)</label></div>
+            <div class="cell"><label><input id="checkbox35" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> High altitude operation (airport above 6000 msl)</label></div>
             <div id="mitigation35" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation35" value="Yes"> Yes</label>
                 <label><input type="radio" name="degradedNavigationMitigation35" value="No"> No</label>
-                <input type="text" id="degradedNavigationMitigationAction35" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+                <!--<input type="text" id="degradedNavigationMitigationAction35" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+                <select id="degradedNavigationMitigationAction35" name="degradedNavigationMitigationAction" disabled>
+                    <option value="">Select mitigation action</option>
+                    <option value="IFR procedure applied">IFR procedure applied</option>
+                    <option value="Visual with PAPI">Visual with PAPI</option>
+                  </select>
                 <button id="applyButton35" class="apply-button" data-checkbox-id="checkbox35" disabled>Apply</button>
               </div>
               </div>
@@ -479,7 +736,12 @@
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation1" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation36" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction36" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction36" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction36" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton36" class="apply-button" data-checkbox-id="checkbox36" disabled>Apply</button>
               </div>
               </div>
@@ -490,7 +752,12 @@
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation37" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation37" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction37" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction37" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction37" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton37" class="apply-button" data-checkbox-id="checkbox37" disabled>Apply</button>
               </div>
               </div>
@@ -501,18 +768,28 @@
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation38" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation1" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction38" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction38" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction38" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton38" class="apply-button" data-checkbox-id="checkbox38" disabled>Apply</button>
               </div>
               </div>
 
         <div class="row">
-            <div class="cell"><label><input id="checkbox39" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)"> No published IAP</label></div>
+            <div class="cell"><label><input id="checkbox39" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> No published IAP - Only VFR</label></div>
             <div id="mitigation39" class="mitigation" style="display: none;">
                 Mitigation applied?
                 <label><input type="radio" name="degradedNavigationMitigation39" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation1" value="No"> No</label>
-      <input type="text" id="degradedNavigationMitigationAction39" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>
+      <!--<input type="text" id="degradedNavigationMitigationAction39" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+      <select id="degradedNavigationMitigationAction39" name="degradedNavigationMitigationAction" disabled>
+        <option value="">Select mitigation action</option>
+        <option value="IFR procedure applied">IFR procedure applied</option>
+        <option value="Visual with PAPI">Visual with PAPI</option>
+      </select>
       <button id="applyButton39" class="apply-button" data-checkbox-id="checkbox39" disabled>Apply</button>
               </div>
               </div>
@@ -521,11 +798,151 @@
         <!-- Add similar rows for other items... -->
 
         <!-- Display Total Score -->
+        <h2>
         <p id="totalScore">Total Score: 0</p>
+    </h2>
         <p id="classification">Classification: No special approval required</p>
-        <button onclick="showMitigation()">Mitigate</button>
+        <button id="resetButton" onclick="resetForm()">Reset</button>
+
         <input type="submit" value="Submit">
-    </form>
+    
+
+    
+        <div class="parent-grid">
+    
+            <div class="grid severity">
+              <!-- Severity Levels -->
+              <div class="severity-header">SEVERITY LEVELS</div>
+              <div class="header">Rating</div>
+              <div class="header">Physical Injury</div>
+              <div class="header">Damage to Assets or Potential Loss of Revenue</div>
+              <div class="header">Damage to Reputation</div>
+              <div class="header">Damage to the Environment</div>
+              
+              <div class="rating">E</div>
+              <div>No Injury</div>
+              <div>No Damage</div>
+              <div>No Impact</div>
+              <div>No Effect</div>
+          
+              <div class="rating">D</div>
+              <div>Minor Injury</div>
+              <div>Minor Damage</div>
+              <div>Slight Impact</div>
+              <div>Minor Effect</div>
+          
+              <div class="rating">C</div>
+              <div>Serious Injury</div>
+              <div>Substantial Damage</div>
+              <div>Limited Impact</div>
+              <div>Contained Effect</div>
+          
+              <div class="rating">B</div>
+              <div>Single Fatality</div>
+              <div>Major Damage</div>
+              <div>Considerable Impact</div>
+              <div>Major Effect</div>
+          
+              <div class="rating">A</div>
+              <div>Multiple Fatality</div>
+              <div>Catastrophic Damage</div>
+              <div>Catastrophic Impact</div>
+              <div>Massive Effect</div>
+            </div>
+          
+            <div class="grid likelihood">
+              <!-- Likelihood Levels -->
+              <div class="likelihood-header">LIKELIHOOD LEVELS</div>
+              <div>1</div>
+              <div>2</div>
+              <div>3</div>
+              <div>4</div>
+              <div>5</div>
+              
+              <div>Unknown Event in Aviation</div>
+              <div>Known in Aviation Industry</div>
+              <div>Occurred in Biz Aviation</div>
+              <div>FRAT Blockage</div>
+              <div>Occurred in the CIA</div>
+              
+              <div class="green">1E</div>
+              <div class="green">2E</div>
+              <div class="green">3E</div>
+              <div class="yellow">4E</div>
+              <div class="yellow">5E</div>
+          
+              <div class="green">1D</div>
+              <div class="green">2D</div>
+              <div class="yellow">3D</div>
+              <div class="yellow">4D</div>
+              <div class="yellow">5D</div>
+          
+              <div class="green">1C</div>
+              <div class="yellow">2C</div>
+              <div class="yellow">3C</div>
+              <div class="yellow">4C</div>
+              <div class="yellow">5C</div>
+          
+              <div class="green">1B</div>
+              <div class="yellow">2B</div>
+              <div class="yellow">3B</div>
+              <div class="red">4B</div>
+              <div class="red">5B</div>
+          
+              <div class="green">1A</div>
+              <div class="yellow">2A</div>
+              
+          <div class="red">3A</div>
+              <div class="red">4A</div>
+              <div class="red">5A</div>
+            </div>
+          </div>
+          
+          <!-- This is a Text Describing how to use the MAtrix-->
+          <div class="example">
+            <h3>Event: Engine failure during flight leading to a crash</h3>
+            <h4>Severity Level:</h4>
+            <ul>
+              <li>Physical Injury: An engine failure during flight can lead to a crash, which could result in multiple fatalities. This would be rated as "Multiple Fatality" (A).</li>
+              <li>Damage to Assets or Potential Loss of Revenue: The loss of the aircraft would be catastrophic, and the revenue loss (from lawsuits, increased insurance premiums, grounded flights, etc.) could be immense. This would also be rated as "Catastrophic Damage" (A).</li>
+              <li>Damage to Reputation: Such an incident would be highly publicized and could cause significant damage to the airline's reputation, potentially leading to a loss of customers. This would be rated as "Catastrophic Impact" (A).</li>
+              <li>Damage to the Environment: Depending on where the crash occurred, there could be significant environmental damage, such as fuel leaks causing pollution. This would likely be rated as "Major Effect" (B) or "Massive Effect" (A), depending on the specifics.</li>
+            </ul>
+            <h4>Likelihood Level:</h4>
+            <ul>
+              <li>Unknown but Possible Event in Aviation: Engine failures during flight, while rare, are known to occur in the aviation industry. Therefore, this would not be a "1".</li>
+              <li>Known in Aviation Industry: Engine failures are known in the aviation industry, so this would be a "2".</li>
+              <li>Occurred in Biz Aviation: If there have been occurrences in business aviation, it would be a "3".</li>
+              <li>CIA Framework Blockage: If such an incident has led to a blockage in the CIA Framework (Confidentiality, Integrity, Availability), it would be a "4".</li>
+              <li>Occurred in the CIA: If such incidents have already occurred in the CIA, it would be a "5".</li>
+            </ul>
+            <p>The exact classification would again depend on the specific circumstances of the aircraft and the incident. However, for this example, we might say the event is at Severity Level A (due to the potential for multiple fatalities and catastrophic damage) and Likelihood Level 3 (if this kind of event has occurred in business aviation before). Therefore, the event would be classified as "3A".</p>
+          </div>
+          
+          <div class="example">
+          <h3>Risk Assessment: Wet Runway Landing with Tailwind</h3>
+          <h4>For the <span class="category">Severity Level</span>, we might consider:</h4>
+          <ul>
+              <li><span class="category">Physical Injury:</span> A hard landing or a runway excursion due to the wet surface and tailwind could potentially result in minor to serious injuries, but it is not likely to lead to fatalities if managed properly. This would be rated as <span class="rating">"Minor Injury" (D) to "Serious Injury" (C)</span>.</li>
+              <li><span class="category">Damage to Assets or Potential Loss of Revenue:</span> A runway excursion or hard landing could lead to substantial damage to the aircraft, and downtime for repairs would lead to a potential loss of revenue. This would be rated as <span class="rating">"Substantial Damage" (C)</span>.</li>
+              <li><span class="category">Damage to Reputation:</span> Such an event could cause some damage to the airline's reputation, as passengers might feel unsafe. However, if handled properly, the long-term impact should be limited. This would be rated as <span class="rating">"Limited Impact" (C)</span>.</li>
+              <li><span class="category">Damage to the Environment:</span> An incident on a wet runway is unlikely to cause significant environmental damage unless there is a fuel leak or other hazardous material release, which is less likely in this scenario. This would be rated as <span class="rating">"No Effect" (E) to "Minor Effect" (D)</span>.</li>
+          </ul>
+          <h4>For the <span class="category">Likelihood Level</span>, we would consider:</h4>
+          <ul>
+              <li><span class="category">Unknown but Possible Event in Aviation:</span> Landings on wet runways with tailwinds, while challenging, are a known potential scenario in aviation. Therefore, this would not be a "1".</li>
+              <li><span class="category">Known in Aviation Industry:</span> These types of landings are known in the aviation industry, so this would be a "2".</li>
+              <li><span class="category">Occurred in Biz Aviation:</span> If there have been occurrences in business aviation, it would be a "3".</li>
+              <li><span class="category">CIA Framework Blockage:</span> If such an incident has led to a blockage in the CIA Framework (Confidentiality, Integrity, Availability), it would be a "4".</li>
+              <li><span class="category">Occurred in the CIA:</span> If such incidents have already occurred in the CIA, it would be a "5".</li>
+          </ul>
+          <div>Given that this kind of event has likely occurred in the aviation industry before, we might say the event is at Severity Level C (due toApologies for the cutoff. Here's the complete HTML and CSS code:
+          </div>
+        
+    
+
+
     <script src="js/js.js"></script>
+    </form>
 </body>
 </html>

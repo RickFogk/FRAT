@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.parent-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.header, .severity-header, .likelihood-header {
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  background-color: #ddd;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.severity-header, .likelihood-header {
+  grid-column: span 5;
+  background-color: #333;
+  color: #fff;
+}
+
+.rating {
+  font-weight: bold;
+  color: #333;
+}
+
+.green {
+  background-color: #b9f6ca;
+  text-align: center;
+}
+
+.yellow {
+  background-color: #ffee58;
+  text-align: center;
+}
+
+.red {
+  background-color: #ff8a80;
+  text-align: center;
+}
+
+.parent-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
