@@ -122,28 +122,39 @@ function calculateScore(value, checkbox) {
   }
 }
 
-
+// Create an object to store checkbox IDs and scores
+let appliedMitigations = {};
 
 
 function applyMitigation(button) {
-  //var checkboxId = button.getAttribute('data-checkbox-id'); 
   var checkboxId = button.getAttribute('data-checkbox-id').replace('checkbox','');
- 
-
   var checkbox = document.getElementById('checkbox' + checkboxId);
-  
-  
+
   // Check if checkbox exists
   if(checkbox) {
-    var checkboxValue = parseInt(checkbox.value);
-    var mitigationScore = checkboxValue / 2;
+    var originalValue = parseInt(checkbox.value);
+    var mitigationScore = originalValue / 2;
+    var oldTotalScore = totalScore; // store the original total score
     totalScore -= mitigationScore; // subtract the mitigation score from total score
-    checkbox.value = checkboxValue - mitigationScore; // update the checkbox value
-    
+    checkbox.value = originalValue - mitigationScore; // update the checkbox value
+
     document.getElementById('totalScore').innerHTML = "Total Score: " + totalScore;
 
     // after applying the mitigation, disable the button to prevent multiple clicks
     button.disabled = true;
+
+    // Store mitigation data
+    appliedMitigations[checkboxId] = {
+      'Selected Checkbox ID': checkboxId,
+      'Original Value': originalValue,
+      'Mitigation Score': mitigationScore,
+      'New Checkbox Value': checkbox.value,
+      'Original Total Score': oldTotalScore,
+      'New Total Score': totalScore
+    };
+
+    // Update localStorage with current scores
+    updateLocalStorage();
   } else {
     console.log('Element with id checkbox' + checkboxId + ' not found');
   }
@@ -231,4 +242,97 @@ document.getElementById('calculateImsafe').addEventListener('click', function() 
   var imsafeScore = illness + medication + stress + alcohol + fatigue + emotion;
 
   document.getElementById('imsafeScoreDisplay').innerHTML = "IMSAFE Score: " + imsafeScore;
+
 });
+
+document.getElementById('resetImsafe').addEventListener('click', function() {
+  document.getElementById('illness').value = '0';
+  document.getElementById('medication').value = '0';
+  document.getElementById('stress').value = '0';
+  document.getElementById('alcohol').value = '0';
+  document.getElementById('fatigue').value = '0';
+  document.getElementById('emotion').value = '0';
+  document.getElementById('imsafeScoreDisplay').innerHTML = '';
+});
+
+
+// Function to create the HTML table
+function createTable() {
+  // Get the table container
+  var tableContainer = document.getElementById('tableContainer');
+
+  // Create table elements
+  var table = document.createElement('table');
+  var thead = document.createElement('thead');
+  var tbody = document.createElement('tbody');
+  var headerRow = document.createElement('tr');
+  
+  // Create table headers
+  var headers = ["Checkbox Name", "Value"];
+  headers.forEach(function(header) {
+    var th = document.createElement('th');
+    th.appendChild(document.createTextNode(header));
+    headerRow.appendChild(th);
+  });
+
+  // Add the header row to the table header
+  thead.appendChild(headerRow);
+  
+  // Add each checked item to the table body
+for (var checkboxId in checkedItems) {
+  var row = document.createElement('tr');
+  
+  // Get the label text of the input element
+  var checkbox = document.getElementById(checkboxId);
+  var checkboxName = checkbox.parentElement.innerText.trim();
+
+  var nameCell = document.createElement('td');
+  nameCell.appendChild(document.createTextNode(checkboxName));
+  row.appendChild(nameCell);
+  
+  var valueCell = document.createElement('td');
+  valueCell.appendChild(document.createTextNode(checkedItems[checkboxId]));
+  row.appendChild(valueCell);
+  
+  tbody.appendChild(row);
+}
+
+  // Add the header and body to the table
+  table.appendChild(thead);
+  table.appendChild(tbody);
+
+  // Remove any existing table from the container
+  while (tableContainer.firstChild) {
+    tableContainer.firstChild.remove();
+  }
+
+  // Add the new table to the container
+  tableContainer.appendChild(table);
+  
+  // Add total score to the container
+  var totalScoreDiv = document.createElement('div');
+  totalScoreDiv.innerHTML = "Total Score: " + totalScore;
+  tableContainer.appendChild(totalScoreDiv);
+}
+
+// Update the table when the state of a checkbox changes
+checkboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', createTable);
+});
+
+// Update the table when a mitigation is applied
+applyButtons.forEach(button => {
+  button.addEventListener('click', function(event) {
+    event.preventDefault(); // prevent form submission
+    applyMitigation(this); // pass the button element itself
+    createTable();
+  });
+});
+
+// Add event listener to prevent form submission
+document.querySelector('form').addEventListener('submit', function(event) {
+  event.preventDefault();
+});
+
+// Call the createTable function initially to create the table
+createTable();

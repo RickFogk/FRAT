@@ -65,7 +65,7 @@
 
 <div class="row">
   <div class="cell">
-    <label><input id="checkbox2" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)"> Short Notice/Change</label>
+    <label for="Short Notice/Change"><input id="checkbox2" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)"> Short Notice/Change</label>
   </div>
   <div id="mitigation2" class="mitigation" style="display: none;">
     Mitigation applied?
@@ -83,7 +83,7 @@
 
 <div class="row">
   <div class="cell">
-    <label><input id="checkbox3" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)"> Twilight Takeoff or landing (30min. within sunrise/sunset)</label>
+    <label for="Twilight Takeoff or landing (30min. within sunrise/sunset)"><input id="checkbox3" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)"> Twilight Takeoff or landing (30min. within sunrise/sunset)</label>
   </div>
   <div id="mitigation3" class="mitigation" style="display: none;">
     Mitigation applied?
@@ -101,7 +101,7 @@
 
 <div class="row">
   <div class="cell">
-    <label><input id="checkbox4" type="checkbox" value="4" onclick="calculateScore(parseInt(this.value), this)"> Night Ops</label>
+    <label for="Night Ops"><input id="checkbox4" type="checkbox" value="4" onclick="calculateScore(parseInt(this.value), this)"> Night Ops</label>
 </div>
 <div id="mitigation4" class="mitigation" style="display: none;">
   Mitigation applied?
@@ -120,7 +120,7 @@
 
 <div class="row">
 <div class="cell">
-  <label><input id="checkbox5" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Maintenance issue (MEL)</label>
+  <label for=" Maintenance issue (MEL)"><input id="checkbox5" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)"> Maintenance issue (MEL)</label>
 </div>
 <div id="mitigation5" class="mitigation" style="display: none;">
   Mitigation applied?
@@ -138,7 +138,7 @@
 
 <div class="row">
 <div class="cell">
-  <label><input id="checkbox6" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)"> Passengers aboard without a Flight Attendant</label>
+  <label for="Passengers aboard without a Flight Attendant"><input id="checkbox6" type="checkbox" value="3" onclick="calculateScore(parseInt(this.value), this)"> Passengers aboard without a Flight Attendant</label>
 </div>
 <div id="mitigation6" class="mitigation" style="display: none;">
   Mitigation applied?
@@ -156,7 +156,7 @@
 
 <!-- Part III: Operation/Equipment factor -->
 <h2>Part III: Human Factor</h2>
-<button id="imsafeButton">IMSAFE Checklist</button>
+<button id="imsafeButton">IMSAFE CALCULATOR</button>
 
 <div id="imsafeSection" style="display: none;">
   <h3>IMSAFE Checklist</h3>
@@ -181,14 +181,14 @@
       <select id="stress">
         <option value="0">No stress</option>
         <option value="5">Moderate stress</option>
-        <option value="10">High stress</option>
+        <option value="15">High stress</option>
       </select>
     </label><br>
 
     <label for="alcohol">Alcohol:
       <select id="alcohol">
         <option value="0">No alcohol</option>
-        <option value="15">Alcohol within the last 8 hours</option>
+        <option value="31">Alcohol within the last 8 hours</option>
       </select>
     </label><br>
 
@@ -209,6 +209,7 @@
     </label><br>
 
     <button type="button" id="calculateImsafe">Calculate IMSAFE Score</button>
+    <button type="button" id="resetImsafe">Reset IMSAFE Score</button>
     <div id="imsafeScoreDisplay"></div> <!-- This will display the score -->
   
 </div>
@@ -416,6 +417,24 @@
                 <button id="applyButton16 class="apply-button" data-checkbox-id="checkbox16" disabled>Apply</button>
               </div>
               </div>
+
+              <div class="row">
+                <div class="cell">
+                <label><input id="checkbox100" type="checkbox" value="10" onclick="calculateScore(parseInt(this.value), this)"> Long journey > 8h and < 10h without Crew Rest.</label>
+                </div>
+                <div id="mitigation100" class="mitigation" style="display: none;">
+                    Mitigation applied?
+                    <label><input type="radio" name="degradedNavigationMitigation100" value="Yes"> Yes</label>
+                    <label><input type="radio" name="degradedNavigationMitigation100" value="No"> No</label>
+                    <!--<input type="text" id="degradedNavigationMitigationAction16" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
+                    <select id="degradedNavigationMitigationAction100" name="degradedNavigationMitigationAction" disabled>
+                        <option value="">Select mitigation action</option>
+                        <option value="IFR procedure applied">IFR procedure applied</option>
+                        <option value="Visual with PAPI">Visual with PAPI</option>
+                      </select>
+                    <button id="applyButton100 class="apply-button" data-checkbox-id="checkbox100" disabled>Apply</button>
+                  </div>
+                  </div>
 
         <!-- Part IV: Weather -->
         <h2>Part IV: Weather</h2>
@@ -804,8 +823,13 @@
         <p id="classification">Classification: No special approval required</p>
         <button id="resetButton" onclick="resetForm()">Reset</button>
 
-        <input type="submit" value="Submit">
-    
+        
+        <button id="submitButton" onclick="handleSubmit()">Submit</button>
+
+
+        <div id="tableContainer"></div>
+
+        
 
     
         <div class="parent-grid">
@@ -900,7 +924,7 @@
           
           <!-- This is a Text Describing how to use the MAtrix-->
           <div class="example">
-            <h3>Event: Engine failure during flight leading to a crash</h3>
+            <h3>Example 1 - Event: Engine failure during flight leading to a crash</h3>
             <h4>Severity Level:</h4>
             <ul>
               <li>Physical Injury: An engine failure during flight can lead to a crash, which could result in multiple fatalities. This would be rated as "Multiple Fatality" (A).</li>
@@ -918,9 +942,40 @@
             </ul>
             <p>The exact classification would again depend on the specific circumstances of the aircraft and the incident. However, for this example, we might say the event is at Severity Level A (due to the potential for multiple fatalities and catastrophic damage) and Likelihood Level 3 (if this kind of event has occurred in business aviation before). Therefore, the event would be classified as "3A".</p>
           </div>
+          <div>
+            <p>The classification of "3A" is indeed quite high on a risk matrix. A risk with this classification means that the event, while not the most likely to occur (a "3" on a scale from 1 to 5), would have catastrophic consequences (an "A" on a scale from A to E) if it did happen. It's important to remember that this classification isn't meant to scare, but to guide decision-making and prioritize safety interventions.</p>
+    
+            <p>The mitigation strategies mentioned earlier are designed to both reduce the likelihood of the event (i.e., bring the "3" down to a "2" or "1") and, where possible, lessen the severity of the consequences if the event were to happen (i.e., bring the "A" down to a "B" or lower).</p>
+    
+            <p>However, in some instances, it might not be possible to reduce the severity rating. For instance, in the case of an engine failure during flight leading to a crash, the severity of the consequences would still be very high, even with excellent emergency response procedures. Therefore, the main focus should be on reducing the likelihood of such an event occurring in the first place through preventative measures such as rigorous maintenance schedules, comprehensive training, and investment in newer, safer aircraft.</p>
+    
+            <p>Remember that the goal of risk management isn't necessarily to eliminate all risk - in many activities, especially those like aviation, some level of risk is inherent. The aim is to reduce the risk to an acceptable level, and to be prepared to manage the consequences if the worst does happen.</p>
+        </div>
+        <div>
+            <p>Mitigation in this case would involve actions taken to either reduce the severity of the potential consequences or decrease the likelihood of the event happening in the first place.</p>
+    
+            <h3>Engine Maintenance and Monitoring:</h3>
+            <p>Implementing a rigorous and regular maintenance schedule for engines can help identify and rectify issues before they lead to engine failure. Additionally, investing in engine monitoring technology can help detect anomalies and predict potential failures.</p>
+    
+            <h3>Flight Crew Training:</h3>
+            <p>Comprehensive training for flight crews on how to handle engine failure situations can help minimize the impact of such an event. This includes practicing engine-out procedures, emergency landings, and other relevant protocols.</p>
+    
+            <h3>Emergency Response Planning:</h3>
+            <p>Having a robust emergency response plan can help minimize the impact of an engine failure if it does occur. This includes having procedures for communication with air traffic control, the deployment of emergency services, and the management of passengers and crew in the aftermath.</p>
+    
+            <h3>Investment in Newer Aircraft:</h3>
+            <p>Newer aircraft models often have more advanced safety features and may be less prone to engine failures. An airline could consider upgrading its fleet to newer models as part of its risk mitigation strategy.</p>
+    
+            <h3>Redundancy Systems:</h3>
+            <p>Ensure the aircraft have proper redundancy systems in place. Modern aircraft are typically designed with twin or multiple engines so that in the unlikely event of an engine failure, the remaining engine(s) can allow the plane to fly and land safely.</p>
+    
+            <p>With these mitigations in place, you would hope to reduce the likelihood level from a '3' to a '2' or even a '1'. The severity level is harder to reduce as it deals with the outcome of an event if it were to occur, but with proper emergency response planning and flight crew training, the severity of the consequences could potentially be lessened.</p>
+    
+            <p>These mitigation strategies require investment in maintenance, training, equipment, and potentially new aircraft, but they're crucial for maintaining safety standards and reducing risk in the aviation industry.</p>
+        </div>
           
           <div class="example">
-          <h3>Risk Assessment: Wet Runway Landing with Tailwind</h3>
+          <h3>Example 2 - Event: Wet Runway Landing with Tailwind</h3>
           <h4>For the <span class="category">Severity Level</span>, we might consider:</h4>
           <ul>
               <li><span class="category">Physical Injury:</span> A hard landing or a runway excursion due to the wet surface and tailwind could potentially result in minor to serious injuries, but it is not likely to lead to fatalities if managed properly. This would be rated as <span class="rating">"Minor Injury" (D) to "Serious Injury" (C)</span>.</li>
@@ -936,7 +991,7 @@
               <li><span class="category">CIA Framework Blockage:</span> If such an incident has led to a blockage in the CIA Framework (Confidentiality, Integrity, Availability), it would be a "4".</li>
               <li><span class="category">Occurred in the CIA:</span> If such incidents have already occurred in the CIA, it would be a "5".</li>
           </ul>
-          <div>Given that this kind of event has likely occurred in the aviation industry before, we might say the event is at Severity Level C (due toApologies for the cutoff. Here's the complete HTML and CSS code:
+          <div>Given that this kind of event has likely occurred in the aviation industry before, we might say the event is at Severity Level C (due to the potential for serious injury and substantial damage) and Likelihood Level 3 (if this kind of event has occurred in business aviation before). Therefore, the event would be classified as "3C".
           </div>
         
     
@@ -944,5 +999,7 @@
 
     <script src="js/js.js"></script>
     </form>
+    <div id="selectedCheckboxes"></div>
+
 </body>
 </html>
