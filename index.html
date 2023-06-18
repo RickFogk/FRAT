@@ -21,27 +21,28 @@
 
 </head>
 <body>
+  <header>
     <h1>Flight Risk Assessment</h1>
     <form id="flightInfoForm">
         <!-- Part I: Flight Information -->
         <h2>Part I: Flight Information</h2>
         <div class="row">
-            <div class="cell"><label>Date: <input type="date" name="date"></label></div>
-            <div class="cell"><label>Flight Number: <input type="text" name="tripId"></label></div>
-            <div class="cell"><label>Origin: <input type="text" name="origin"></label></div>
-            <div class="cell"><label>Destination: <input type="text" name="destination"></label></div>
-            <div class="cell"><label>PIC: <input type="text" name="pic"></label></div>
-            <div class="cell"><label>SIC: <input type="text" name="sic"></label></div>
+            <div class="cell"><label>Date: <input type="date" id="date" name="date" required></label></div>
+            <div class="cell"><label>Flight Number: <input type="text" id="tripId" name="tripId" required></label></div>
+            <div class="cell"><label>Origin: <input type="text" id="Origin" name="origin" required></label></div>
+            <div class="cell"><label>Destination: <input type="text" id="destination" name="destination" required></label></div>
+            <div class="cell"><label>PIC: <input type="text" id="pic" name="pic" required></label></div>
+            <div class="cell"><label>SIC: <input type="text" id="sic" name="sic" required></label></div>
             
-            <div class="cell"><label>Aircraft: <input type="text" name="aircraft"></label></div>
+            <div class="cell"><label>Aircraft: <input type="text" id="aircraft" name="aircraft" required></label></div>
+            <div id="wrapper"></div>
         </div>
         <input type="submit" value="Insert">
     </form>
-        
+  </header> 
+    
+  <main>
      <form>
-
-     
-
         <!-- Part II: Operation/Equipment factor -->
 <h2>Part II: Operation/Equipment factor</h2>
 <div class="row">
@@ -757,9 +758,9 @@
 
         <div class="row">
             <div class="cell"><label><input id="checkbox36" type="checkbox" value="5" onclick="calculateScore(parseInt(this.value), this)">Non-towered airport</label></div>
-            <div id="mitigatio36" class="mitigation" style="display: none;">
+            <div id="mitigation36" class="mitigation" style="display: none;">
                 Mitigation applied?
-                <label><input type="radio" name="degradedNavigationMitigation1" value="Yes"> Yes</label>
+                <label><input type="radio" name="degradedNavigationMitigation36" value="Yes"> Yes</label>
       <label><input type="radio" name="degradedNavigationMitigation36" value="No"> No</label>
       <!--<input type="text" id="degradedNavigationMitigationAction36" name="degradedNavigationMitigationAction" placeholder="Enter mitigation action" disabled>-->
       <select id="degradedNavigationMitigationAction36" name="degradedNavigationMitigationAction" disabled>
@@ -819,7 +820,7 @@
               </div>
               </div>
         
-        
+            </main>
         <!-- Add similar rows for other items... -->
 
         <!-- Display Total Score -->

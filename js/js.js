@@ -1,3 +1,6 @@
+
+
+
 function handleMitigationAction(buttonId) {
   var button = document.getElementById(buttonId);
   var checkboxId = button.getAttribute('data-checkbox-id');
@@ -25,7 +28,11 @@ function updateLocalStorage() {
     localStorage.setItem('Total_Score', totalScore);
 }
 
+//-----------------------------------------------------------
 // Calculate Score Function
+// Initialize the array for selected checkboxes
+var selectedCheckboxes = [];
+
 function calculateScore(value, checkbox) {
   var checkboxId = checkbox.id.replace('checkbox', '');
 
@@ -33,34 +40,38 @@ function calculateScore(value, checkbox) {
     if (!checkedItems.hasOwnProperty(checkbox.id)) {
       totalScore += value;
       checkedItems[checkbox.id] = value;
+      // Add the checkbox to the array of selected checkboxes
+      selectedCheckboxes.push(checkbox.id);
     }
   } else {
     if (checkedItems.hasOwnProperty(checkbox.id)) {
       totalScore -= checkedItems[checkbox.id];
       delete checkedItems[checkbox.id];
+      // Remove the checkbox from the array of selected checkboxes
+      selectedCheckboxes = selectedCheckboxes.filter(id => id !== checkbox.id);
     }
   }
 
   document.getElementById('totalScore').innerHTML = "Total Score: " + totalScore;
-  classifyRisk(totalScore); 
 
-  // Show/Hide the mitigation elements based on the Total_Score and whether the checkbox is checked
-  var mitigationElements = document.getElementById('mitigation' + checkboxId);
-  
-  if (totalScore > 21 && checkbox.checked) {
-    mitigationElements.style.display = 'block';
-    var dropdown = mitigationElements.querySelector('select');
-    var applyButton = mitigationElements.querySelector('button');
-    if (dropdown) dropdown.disabled = false;
-    if (applyButton) applyButton.disabled = false;
+  // Update mitigation visibility after the score is updated
+  updateMitigationVisibility();
+
+  if (totalScore > 21) {
+    document.getElementById('totalScore').style.color = "red";
   } else {
-    mitigationElements.style.display = 'none';
+    document.getElementById('totalScore').style.color = "black";
   }
 }
 
 
+
+
+
 // Create an object to store checkbox IDs and scores
 let appliedMitigations = {};
+// Add a new variable to track total mitigation score
+var totalMitigationScore = 0;
 
 function applyMitigation(button) {
   var checkboxId = button.getAttribute('data-checkbox-id').replace('checkbox','');
@@ -96,6 +107,32 @@ function applyMitigation(button) {
   } else {
     console.log('Element with id checkbox' + checkboxId + ' not found');
   }
+  updateMitigationVisibility();
+}
+
+//--------------------------------------------------------------------------------
+// UPDATE MITIGATION VISIBILITY
+function updateMitigationVisibility() {
+  // Loop over all the selected checkboxes
+  for (var i = 0; i < selectedCheckboxes.length; i++) {
+    var checkboxId = selectedCheckboxes[i];
+    var checkbox = document.getElementById(checkboxId);
+
+    // Get the associated mitigation element
+    var mitigationElement = document.getElementById('mitigation' + checkboxId.replace('checkbox', ''));
+
+    // If the totalScore is greater than 21 and the checkbox is checked, show the mitigation element
+    if (totalScore > 21 && checkbox.checked) {
+      mitigationElement.style.display = 'block';
+      var dropdown = mitigationElement.querySelector('select');
+      var applyButton = mitigationElement.querySelector('button');
+      if (dropdown) dropdown.disabled = false;
+      if (applyButton) applyButton.disabled = false;
+    } else {
+      // Otherwise, hide the mitigation element
+      mitigationElement.style.display = 'none';
+    }
+  }
 }
 
 
@@ -115,7 +152,7 @@ function classifyRisk(score) {
   updateLocalStorage();
 }
 
-// Event listener for checkboxes
+/// Event listener for checkboxes
 var checkboxes = document.querySelectorAll('input[type=checkbox]');
 checkboxes.forEach(checkbox => {
   checkbox.addEventListener('change', function() {
@@ -131,11 +168,26 @@ applyButtons.forEach(button => {
     event.preventDefault(); // prevent form submission
     applyMitigation(this); // pass the button element itself
   });
+});
+
+
+
+// Event listener for Apply buttons
+var applyButtons = document.querySelectorAll('.apply-button');
+applyButtons.forEach(button => {
+  button.addEventListener('click', function(event) {
+    event.preventDefault(); // prevent form submission
+    applyMitigation(this); // pass the button element itself
+  });
 
 });
 
+/////--------------------------------------------------------------------------------
+
 function resetForm() {
   // Reset the score
+  // Reset the array of selected checkboxes
+  selectedCheckboxes = [];
   totalScore = 0;
   document.getElementById('totalScore').innerHTML = "Total Score: 0";
   classifyRisk(totalScore);
@@ -209,7 +261,7 @@ function createTable() {
   var headerRow = document.createElement('tr');
 
   // Create table headers
-  var headers = ["Checkbox Name", "Value"];
+  var headers = ["Condition", "Value"];
   headers.forEach(function(header) {
     var th = document.createElement('th');
     th.appendChild(document.createTextNode(header));
