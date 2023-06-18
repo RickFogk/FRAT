@@ -1,36 +1,10 @@
-
-
-
-function handleMitigationAction(buttonId) {
-  var button = document.getElementById(buttonId);
-  var checkboxId = button.getAttribute('data-checkbox-id');
-  var checkbox = document.getElementById('checkbox' + checkboxId);
-  var checkboxValue = parseInt(checkbox.value);
-
-  var mitigationScore = checkboxValue / 2;
-  totalScore -= mitigationScore;
-
-  document.getElementById('totalScore').innerHTML = "Total Score: " + totalScore;
-
-  // after applying the mitigation, disable the button to prevent multiple clicks
-  button.disabled = true;
-}
-
-// Retrieve Total_Score from localStorage
 var totalScore = 0;
 var checkedItems = {};
 
-// Update the display with the initial scores
-document.getElementById('totalScore').innerHTML = "Total Score: " + totalScore;
-
-// Function to update localStorage with current scores
 function updateLocalStorage() {
     localStorage.setItem('Total_Score', totalScore);
 }
 
-//-----------------------------------------------------------
-// Calculate Score Function
-// Initialize the array for selected checkboxes
 var selectedCheckboxes = [];
 
 function calculateScore(value, checkbox) {
@@ -40,21 +14,17 @@ function calculateScore(value, checkbox) {
     if (!checkedItems.hasOwnProperty(checkbox.id)) {
       totalScore += value;
       checkedItems[checkbox.id] = value;
-      // Add the checkbox to the array of selected checkboxes
       selectedCheckboxes.push(checkbox.id);
     }
   } else {
     if (checkedItems.hasOwnProperty(checkbox.id)) {
       totalScore -= checkedItems[checkbox.id];
       delete checkedItems[checkbox.id];
-      // Remove the checkbox from the array of selected checkboxes
       selectedCheckboxes = selectedCheckboxes.filter(id => id !== checkbox.id);
     }
   }
 
   document.getElementById('totalScore').innerHTML = "Total Score: " + totalScore;
-
-  // Update mitigation visibility after the score is updated
   updateMitigationVisibility();
 
   if (totalScore > 21) {
@@ -64,35 +34,24 @@ function calculateScore(value, checkbox) {
   }
 }
 
-
-
-
-
-// Create an object to store checkbox IDs and scores
 let appliedMitigations = {};
-// Add a new variable to track total mitigation score
-var totalMitigationScore = 0;
 
 function applyMitigation(button) {
   var checkboxId = button.getAttribute('data-checkbox-id').replace('checkbox','');
   var checkbox = document.getElementById('checkbox' + checkboxId);
 
-  // Check if checkbox exists
   if(checkbox) {
     var originalValue = parseInt(checkbox.value);
     var mitigationScore = originalValue / 2;
-    var oldTotalScore = totalScore; // store the original total score
-    totalScore -= mitigationScore; // subtract the mitigation score from total score
+    var oldTotalScore = totalScore;
+    totalScore -= mitigationScore;
     var newValue = originalValue - mitigationScore;
-    checkbox.value = newValue; // update the checkbox value
-    checkedItems[checkbox.id] = newValue; // update the value in checkedItems
+    checkbox.value = newValue;
+    checkedItems[checkbox.id] = newValue;
 
     document.getElementById('totalScore').innerHTML = "Total Score: " + totalScore;
-
-    // after applying the mitigation, disable the button to prevent multiple clicks
     button.disabled = true;
 
-    // Store mitigation data
     appliedMitigations[checkboxId] = {
       'Selected Checkbox ID': checkboxId,
       'Original Value': originalValue,
@@ -102,40 +61,27 @@ function applyMitigation(button) {
       'New Total Score': totalScore
     };
 
-    // Update localStorage with current scores
     updateLocalStorage();
   } else {
     console.log('Element with id checkbox' + checkboxId + ' not found');
   }
+
   updateMitigationVisibility();
 }
 
-//--------------------------------------------------------------------------------
-// UPDATE MITIGATION VISIBILITY
 function updateMitigationVisibility() {
-  // Loop over all the selected checkboxes
   for (var i = 0; i < selectedCheckboxes.length; i++) {
     var checkboxId = selectedCheckboxes[i];
     var checkbox = document.getElementById(checkboxId);
-
-    // Get the associated mitigation element
     var mitigationElement = document.getElementById('mitigation' + checkboxId.replace('checkbox', ''));
 
-    // If the totalScore is greater than 21 and the checkbox is checked, show the mitigation element
     if (totalScore > 21 && checkbox.checked) {
       mitigationElement.style.display = 'block';
-      var dropdown = mitigationElement.querySelector('select');
-      var applyButton = mitigationElement.querySelector('button');
-      if (dropdown) dropdown.disabled = false;
-      if (applyButton) applyButton.disabled = false;
     } else {
-      // Otherwise, hide the mitigation element
       mitigationElement.style.display = 'none';
     }
   }
 }
-
-
 
 function classifyRisk(score) {
   var classificationElement = document.getElementById('classification');
@@ -148,11 +94,10 @@ function classifyRisk(score) {
   } else {
     document.getElementById('classification').innerText = "Classification: Director Approval required";
   }
-  // Update localStorage with current scores
+
   updateLocalStorage();
 }
 
-/// Event listener for checkboxes
 var checkboxes = document.querySelectorAll('input[type=checkbox]');
 checkboxes.forEach(checkbox => {
   checkbox.addEventListener('change', function() {
@@ -161,59 +106,74 @@ checkboxes.forEach(checkbox => {
   });
 });
 
-// Event listener for Apply buttons
-var applyButtons = document.querySelectorAll('.apply-button');
-applyButtons.forEach(button => {
-  button.addEventListener('click', function(event) {
-    event.preventDefault(); // prevent form submission
-    applyMitigation(this); // pass the button element itself
-  });
-});
+// Event listener for radio buttons
+var radioButtons = document.querySelectorAll('input[type=radio]');
+radioButtons.forEach(radioButton => {
+  radioButton.addEventListener('change', function() {
+    var mitigationElement = this.closest('.mitigation');
+    var dropdown = mitigationElement.querySelector('select');
+    var applyButton = mitigationElement.querySelector('button');
 
-
-
-// Event listener for Apply buttons
-var applyButtons = document.querySelectorAll('.apply-button');
-applyButtons.forEach(button => {
-  button.addEventListener('click', function(event) {
-    event.preventDefault(); // prevent form submission
-    applyMitigation(this); // pass the button element itself
-  });
-
-});
-
-/////--------------------------------------------------------------------------------
-
-function resetForm() {
-  // Reset the score
-  // Reset the array of selected checkboxes
-  selectedCheckboxes = [];
-  totalScore = 0;
-  document.getElementById('totalScore').innerHTML = "Total Score: 0";
-  classifyRisk(totalScore);
-
-  // Reset the checkboxes
-  for (var key in checkedItems) {
-    var checkbox = document.getElementById(key);
-    if (checkbox) {
-      checkbox.checked = false;
-      checkbox.disabled = false;
+    if (this.value === 'Yes') {
+      // If 'Yes' is selected, enable the dropdown and apply button
+      if (dropdown) dropdown.disabled = false;
+      if (applyButton) applyButton.disabled = false;
+    } else {
+      // If 'No' is selected, disable the dropdown and apply button
+      if (dropdown) dropdown.disabled = true;
+      if (applyButton) applyButton.disabled = true;
     }
+  });
+});
 
-    // Hide mitigation elements
-    var mitigationElements = document.getElementById('mitigation' + key.replace('checkbox', ''));
-    if (mitigationElements) {
-      mitigationElements.style.display = 'none';
-      var inputs = mitigationElements.querySelectorAll('input, button');
-      for (var j = 0; j < inputs.length; j++) {
-        inputs[j].disabled = true;
-      }
+// Event listener for Apply buttons
+var applyButtons = document.querySelectorAll('.apply-button');
+applyButtons.forEach(button => {
+  button.addEventListener('click', function(event) {
+    event.preventDefault(); // prevent form submission
+    applyMitigation(this); // pass the button element itself
+  });
+});
+
+function updateMitigationVisibility() {
+  // Loop over all the selected checkboxes
+  for (var i = 0; i < selectedCheckboxes.length; i++) {
+    var checkboxId = selectedCheckboxes[i];
+    var checkbox = document.getElementById(checkboxId);
+
+    // Get the associated mitigation element
+    var mitigationElement = document.getElementById('mitigation' + checkboxId.replace('checkbox', ''));
+
+    // If the totalScore is greater than 21 and the checkbox is checked, show the mitigation element
+    if (totalScore > 21 && checkbox.checked) {
+      mitigationElement.style.display = 'block';
+    } else {
+      // Otherwise, hide the mitigation element
+      mitigationElement.style.display = 'none';
     }
   }
-
-  // Clear the checked items object
-  checkedItems = {};
 }
+
+function applyMitigation(button) {
+  var checkboxId = button.getAttribute('data-checkbox-id');
+  var checkbox = document.getElementById(checkboxId);
+
+  // Check if checkbox exists
+  if (checkbox) {
+    // Subtract half the value of the checkbox from the total score
+    var checkboxValue = parseInt(checkbox.value);
+    totalScore -= checkboxValue / 2;
+
+    // Now update the total score on the page
+    document.getElementById('totalScore').innerText = totalScore;
+
+    updateMitigationVisibility();
+  } else {
+    console.log('Element with id ' + checkboxId + ' not found');
+  }
+}
+
+
 
 // IMSAFE Section
 document.getElementById('imsafeButton').addEventListener('click', function(event) {
